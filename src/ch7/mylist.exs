@@ -26,6 +26,10 @@ defmodule Mylist do
 
   defp _rot(ltr, s) when ltr + s <= 122, do: ltr + s
   defp _rot(ltr, s), do: rem(ltr + s, 122) + 96
+
+  def dumbEven([]), do: true
+  def dumbEven([a, b | tail]), do: dumbEven(tail)
+  def dumbEven([_]), do: false
 end
 
 # (1..10) |> Enum.to_list |> Mylist.len
@@ -36,3 +40,4 @@ end
 # 10
 IO.puts(Mylist.max([5, 4, 1, 2, 10, 3, 4, 7]))
 IO.puts(Mylist.caesar('ryvkve', 13))
+IO.puts(Mylist.dumbEven([1, 2, 3, 4, 5]))
