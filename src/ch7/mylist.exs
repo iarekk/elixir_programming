@@ -21,6 +21,11 @@ defmodule Mylist do
   defp _max(m, []), do: m
   defp _max(m, [h | t]) when h > m, do: _max(h, t)
   defp _max(m, [_ | t]), do: _max(m, t)
+
+  def caesar(lst, shift), do: map(lst, &_rot(&1, shift))
+
+  defp _rot(ltr, s) when ltr + s <= 122, do: ltr + s
+  defp _rot(ltr, s), do: rem(ltr + s, 122) + 96
 end
 
 # (1..10) |> Enum.to_list |> Mylist.len
@@ -30,3 +35,4 @@ end
 # Mylist.reduce [1,2,3], 100, &(&1 * &2)
 # 10
 IO.puts(Mylist.max([5, 4, 1, 2, 10, 3, 4, 7]))
+IO.puts(Mylist.caesar('ryvkve', 13))
