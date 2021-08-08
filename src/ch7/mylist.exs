@@ -3,13 +3,13 @@ defmodule Mylist do
   def len([_ | xs]), do: 1 + len(xs)
 
   def square([]), do: []
-  def square([x | xs]), do: [x*x | square(xs)]
+  def square([x | xs]), do: [x * x | square(xs)]
 
   def map([], _), do: []
   def map([head | tail], func), do: [func.(head) | map(tail, func)]
 
   def reduce([], value, _), do: value
-  def reduce([head|tail], value, func), do: reduce(tail, func.(head, value), func)
+  def reduce([head | tail], value, func), do: reduce(tail, func.(head, value), func)
 
   def mapsum(lst, f) do
     mapped = map(lst, f)

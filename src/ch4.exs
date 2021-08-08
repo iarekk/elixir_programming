@@ -3,7 +3,8 @@ defmodule Ch4 do
   # ...
   if line_no == 50 do
     IO.puts("new-page\n")
-    line_no = 0 # no reassignment leak anymore
+    # no reassignment leak anymore
+    line_no = 0
     IO.puts(line_no)
     IO.puts("---\n")
   end
