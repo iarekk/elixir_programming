@@ -54,18 +54,20 @@ defmodule Mylist do
 
   def for_location_27([_ | tail]), do: for_location_27(tail)
 
-  def for_location([], loc), do: []
+  def for_location([], _), do: []
   def for_location([head = [_, loc, _, _] | tail], loc), do: [head | for_location(tail, loc)]
   def for_location([_ | tail], loc), do: for_location(tail, loc)
+
+  def span(from, to) when from <= to, do: [from | span(from + 1, to)]
+  def span(_, _), do: []
 end
 
-# (1..10) |> Enum.to_list |> Mylist.len
-# Mylist.square(1..10 |> Enum.to_list)
-# [a,b,c] = Mylist.map [4,5,6], fn (n) -> n*3 end
-# Mylist.map [4,5,6], &(&1 * &1)
-# Mylist.reduce [1,2,3], 100, &(&1 * &2)
-# 10
+IO.inspect(1..10 |> Enum.to_list() |> Mylist.len())
+IO.inspect(Mylist.square(1..10 |> Enum.to_list()))
+IO.inspect(Mylist.map([4, 5, 6], fn n -> n * 3 end))
+IO.inspect(Mylist.map([4, 5, 6], &(&1 * 30)))
+IO.inspect(Mylist.reduce([1, 2, 3], 100, &(&1 * &2)))
 IO.puts(Mylist.max([5, 4, 1, 2, 10, 3, 4, 7]))
 IO.puts(Mylist.caesar('ryvkve', 13))
-IO.puts(Mylist.dumbEven([1, 2, 3, 4, 5]))
-IO.puts(Mylist.for_location(Mylist.test_data(), 26))
+IO.puts(Mylist.dumbEven([1, 2, 3, 4]))
+IO.inspect(Mylist.for_location(Mylist.test_data(), 26))
