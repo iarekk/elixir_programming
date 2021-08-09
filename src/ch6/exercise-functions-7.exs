@@ -20,3 +20,5 @@ File.cwd()
 # – Convert a string containing JSON into Elixir data structures. (Just
 # find; don’t install.)
 # – Execute a command in your operating system’s shell.
+
+System.cmd("date", [])
