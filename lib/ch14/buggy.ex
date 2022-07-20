@@ -1,5 +1,7 @@
 defmodule Buggy do
-  def parse_header(<<format::integer-16, tracks::integer-16, division::integer-16>>) do
+  def parse_header(<<format::integer-16, tracks::integer-16, division::bits-16>>) do
+
+    require IEx; IEx.pry;
     IO.puts "format #{format}"
     IO.puts "tracks #{tracks}"
     IO.puts "division #{decode(division)}"
@@ -13,3 +15,7 @@ defmodule Buggy do
     "#{-fps} fps, #{beats}/frame"
   end
 end
+# header = <<0,1,0,8,0,120>>
+# f = fn(<<k::4, l::4>>) -> "#{k} #{l}" end
+# f.(<<2::2, 2::2, 0::4>>)
+# f.(<<100>>)
