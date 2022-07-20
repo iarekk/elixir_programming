@@ -1,7 +1,6 @@
 defmodule Buggy do
   def parse_header(<<format::integer-16, tracks::integer-16, division::bits-16>>) do
 
-    require IEx; IEx.pry;
     IO.puts "format #{format}"
     IO.puts "tracks #{tracks}"
     IO.puts "division #{decode(division)}"
