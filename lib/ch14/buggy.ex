@@ -6,11 +6,11 @@ defmodule Buggy do
     IO.puts "division #{decode(division)}"
   end
 
-  def decode(<<1::1, beats::15>>) do
+  def decode(<<0::1, beats::15>>) do
     "🎵 = #{beats}"
   end
 
-  def decode(<<0::1, fps::7, beats::8>>) do
+  def decode(<<1::1, fps::7, beats::8>>) do
     "#{-fps} fps, #{beats}/frame"
   end
 end
@@ -18,3 +18,9 @@ end
 # f = fn(<<k::4, l::4>>) -> "#{k} #{l}" end
 # f.(<<2::2, 2::2, 0::4>>)
 # f.(<<100>>)
+
+# setting a breakpoint:
+# break! Buggy.decode/1
+#
+# check breakpoints:
+# breaks
