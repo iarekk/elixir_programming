@@ -3,20 +3,28 @@ defmodule Ch14.StatsTest do
 
   doctest Ch14.Stats
 
+  setup do
+    [
+      list: [1, 3, 5, 7, 9, 11],
+      sum: 36,
+      count: 6
+    ]
+  end
+
   describe "stats on lists of ints" do
-    test "calculates sum" do
-      list = [1, 3, 5, 7, 9]
-      assert Ch14.Stats.sum(list) == 25
+    test "calculates sum", fixture do
+      list = fixture.list
+      assert Ch14.Stats.sum(list) == fixture.sum
     end
 
-    test "calculates count" do
-      list = [1, 3, 5, 7, 9]
-      assert Ch14.Stats.count(list) == 5
+    test "calculates count", fixture do
+      list = fixture.list
+      assert Ch14.Stats.count(list) == fixture.count
     end
 
-    test "calculates average" do
-      list = [1, 3, 5, 7, 9]
-      assert Ch14.Stats.average(list) == 5
+    test "calculates average", fixture do
+      list = fixture.list
+      assert Ch14.Stats.average(list) == fixture.sum / fixture.count
     end
   end
 end
