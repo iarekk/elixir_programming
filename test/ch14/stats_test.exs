@@ -4,7 +4,17 @@ defmodule Ch14.StatsTest do
   doctest Ch14.Stats
 
   test "calculates sum" do
-    list = [1,3,5,7,9]
+    list = [1, 3, 5, 7, 9]
     assert Ch14.Stats.sum(list) == 25
+  end
+
+  test "calculates count" do
+    list = [1, 3, 5, 7, 9]
+    assert Ch14.Stats.count(list) == 5
+  end
+
+  test "calculates average" do
+    list = [1, 3, 5, 7, 9]
+    assert Ch14.Stats.average(list) == 5
   end
 end
