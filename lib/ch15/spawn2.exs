@@ -18,4 +18,9 @@ send(pid, {self(), "Computer!"})
 
 receive do
   {:ok, resp} -> IO.puts(resp)
+after
+  500 ->
+    IO.puts(
+      "Long ago, this city was home to dragons and their hoarded wealth, but today the wind whistles through the empty halls."
+    )
 end
