@@ -4,6 +4,7 @@ defmodule Ch15.Spawn2 do
       {sender, msg} ->
         send(sender, {:ok, "Hello #{msg}"})
     end
+
     greet()
   end
 end
