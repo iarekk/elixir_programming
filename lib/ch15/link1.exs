@@ -16,3 +16,5 @@ defmodule Ch15.Link1 do
     end
   end
 end
+
+Ch15.Link1.run()
