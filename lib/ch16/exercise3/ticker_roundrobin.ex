@@ -23,11 +23,16 @@ defmodule Ch16.Exercise3.TickerRoundrobin do
 
         if(Enum.empty?(clients_todo)) do
           if(Enum.empty?(clients_done)) do
-            generator(Enum.reverse(clients_done), [], tick_number + 1)
+            # nothing to do
+            generator([], [], tick_number + 1)
           else
-            generator(Enum.reverse(clients_done), [], tick_number)
+            # all done, rotating to the first
+            [cl | rem_todo] = Enum.reverse(clients_done)
+            send(cl, {:tick, tick_number})
+            generator(rem_todo, [cl], tick_number + 1)
           end
         else
+          # halfway through the pile
           [cl | rem_todo] = clients_todo
           send(cl, {:tick, tick_number})
           generator(rem_todo, [cl | clients_done], tick_number + 1)
