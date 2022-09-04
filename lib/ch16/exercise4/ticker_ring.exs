@@ -17,33 +17,27 @@ defmodule Ch16.Exercise4.TickerRing do
         IO.puts("client ##{client_id} received tick from ##{sender_id}")
         generate(client_id, next_pid, true)
 
+      {:repoint, new_client_pid} ->
+        IO.puts(
+          "client ##{client_id} received repoint to PID ##{inspect(new_client_pid)}, current next in line: #{inspect(next_pid)}"
+        )
+
+        generate(client_id, new_client_pid, is_active)
+
       {:register, new_client_pid} ->
         IO.puts(
           "client ##{client_id} received registration with PID ##{inspect(new_client_pid)}, current next in line: #{inspect(next_pid)}"
         )
 
         if(is_nil(next_pid)) do
-          IO.puts(
-            "sending repoint request to #{inspect(new_client_pid)}, repointing to #{inspect(self())}"
-          )
-
+          # new client with nil next pid
           send(new_client_pid, {:repoint, self()})
+          generate(client_id, new_client_pid, is_active)
         else
-          IO.puts(
-            "sending repoint request to #{inspect(new_client_pid)}, repointing to #{inspect(next_pid)}"
-          )
-
+          # old client receiving a registration
           send(new_client_pid, {:repoint, next_pid})
+          generate(client_id, new_client_pid, is_active)
         end
-
-        generate(client_id, new_client_pid, is_active)
-
-      {:repoint, new_client_pid} ->
-        IO.puts(
-          "client ##{client_id} received repoint with PID ##{inspect(new_client_pid)}, current next in line: #{inspect(next_pid)}"
-        )
-
-        generate(client_id, new_client_pid, is_active)
     after
       @interval ->
         if(is_active) do
@@ -71,12 +65,3 @@ send(pid1, {:register, pid2})
 pid3 = spawn(Ch16.Exercise4.TickerRing, :generate, ["3", nil, false])
 IO.puts("pid3: #{inspect(pid3)}")
 send(pid2, {:register, pid3})
-pid4 = spawn(Ch16.Exercise4.TickerRing, :generate, ["4", nil, false])
-IO.puts("pid4: #{inspect(pid4)}")
-send(pid3, {:register, pid4})
-
-# A -> B -> C -> A
-# global handle pointing at A
-# D -> A, then C must point to D (D -> A -> B -> C -> D)
-# needed: update C, furthermost from A
-# D -> B, then A must point to D
