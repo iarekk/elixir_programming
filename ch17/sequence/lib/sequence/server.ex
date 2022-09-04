@@ -10,6 +10,10 @@ defmodule Sequence.Server do
   end
 
   def handle_call({:set_number, new_number}, _from, _cur) do
-    {:reply, new_number, new_number}
+    {:reply, {:set_to, new_number}, new_number}
+  end
+
+  def handle_cast({:increment_number, increment}, current_number) do
+    {:noreply, current_number + increment}
   end
 end
