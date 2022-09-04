@@ -1,0 +1,7 @@
+{:ok, pid} = GenServer.start_link(OtpStack.Server, ["peek", "a", :boo, 92, "crashes after here"])
+IO.puts("Pop item: #{GenServer.call(pid, :pop)}")
+IO.puts("Pop item: #{GenServer.call(pid, :pop)}")
+IO.puts("Pop item: #{GenServer.call(pid, :pop)}")
+IO.puts("Pop item: #{GenServer.call(pid, :pop)}")
+IO.puts("Pop item: #{GenServer.call(pid, :pop)}")
+IO.puts("Pop item: #{GenServer.call(pid, :pop)}")
