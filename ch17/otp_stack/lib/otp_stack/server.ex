@@ -13,4 +13,8 @@ defmodule OtpStack.Server do
   def handle_call(:pop, _pid, [head | tail]) do
     {:reply, head, tail}
   end
+
+  def handle_cast({:push, new_element}, current_list) do
+    {:noreply, [new_element | current_list]}
+  end
 end
