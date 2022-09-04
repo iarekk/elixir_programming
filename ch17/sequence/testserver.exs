@@ -1,0 +1,7 @@
+{ :ok , pid } = GenServer.start_link(Sequence.Server, 100)
+IO.puts("Returned: #{inspect GenServer.call(pid, :next_number)}")
+IO.puts("Returned: #{inspect GenServer.call(pid, :next_number)}")
+IO.puts("Returned: #{inspect GenServer.call(pid, :next_number)}")
+IO.puts("Returned: #{inspect GenServer.call(pid, {:set_number, 400})}")
+IO.puts("Returned: #{inspect GenServer.call(pid, :next_number)}")
+IO.puts("Returned: #{inspect GenServer.call(pid, :next_number)}")
